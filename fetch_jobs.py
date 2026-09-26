@@ -3,13 +3,11 @@ from render import render_jobs
 
 
 URL = "https://remotive.com/api/remote-jobs"
-params = {
-    "category": "software-development",
-    "limit": 10
-}
+
 
 def fetch_jobs(category, limit):
-    response = requests.get(url=URL, params=params, timeout=10)
+    filters = {"category" : category, "limit" : limit}
+    response = requests.get(url=URL, params=filters, timeout=10)
     data = response.json()
 
     jobs = data["jobs"]
@@ -26,5 +24,5 @@ def fetch_jobs(category, limit):
 def count_jobs(jobs):
     return len(jobs)
 
-jobs = fetch_jobs(params["category"], params["limit"])
+jobs = fetch_jobs("software-development", 10)
 
